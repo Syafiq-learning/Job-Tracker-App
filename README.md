@@ -1,2 +1,13 @@
 # Job-Tracker-App
-Job aplication tracker
+Job Application Tracker
+
+(Info base on chatgpt)
+src/main/
+ ├── java/
+ └── resources/
+      ├── templates/
+      │     ├── index.html
+      │     ├── dashboard.html
+      └── static/
+            ├── css/
+            ├── js/
