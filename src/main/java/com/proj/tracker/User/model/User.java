@@ -1,16 +1,19 @@
 package com.proj.tracker.User.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "users")
 public class User {
     @Id
     private String id;
+
     private String name;
     private String email;
     private char[] password;
 
-    public User(String id, String name, String email, char[] password) {
-        this.id = id;
+    public User(String name, String email, char[] password) {
+
         this.name = name;
         this.email = email;
         this.password = password;
