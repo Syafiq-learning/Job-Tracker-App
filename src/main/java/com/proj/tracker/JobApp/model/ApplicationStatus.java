@@ -1,4 +1,4 @@
-package com.proj.tracker.User.model;
+package com.proj.tracker.JobApp.model;
 
 public enum ApplicationStatus {
     APPLIED,
