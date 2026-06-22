@@ -50,3 +50,15 @@ com.yourname.tracker
 ├── repository/
 ├── model/
 └── dto/
+
+✅ User CRUD
+✅ JobApplication CRUD
+
+⬜ Validation
+⬜ Exception Handling
+⬜ Status Filtering
+⬜ Dashboard Endpoint
+⬜ Swagger
+⬜ JWT Authentication
+⬜ Docker
+⬜ Frontend (HTML/JS or React)
