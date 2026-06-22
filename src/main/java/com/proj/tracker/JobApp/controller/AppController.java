@@ -3,6 +3,7 @@ package com.proj.tracker.JobApp.controller;
 import com.proj.tracker.JobApp.model.JobApp;
 import com.proj.tracker.JobApp.service.AppService;
 
+
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
