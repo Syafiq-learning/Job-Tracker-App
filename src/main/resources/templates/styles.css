@@ -1,0 +1,39 @@
+body{
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(
+        -45deg,
+        #4f8cff,
+        #6ea8fe,
+        #8ec5fc,
+        #b6d4fe
+    );
+    Background-size: 300% 300%;
+    animation: gradientMove 12s ease infinite;
+}
+@keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+            }
+.glass-card{
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    color: #212529;
+    padding: 30px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+.form-label {
+    color: #212529;
+}
+.glow-circle{
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    background: rgba(13, 202, 240, 0.25);
+    border-radius: 50%;
+    filter: blur(100px);
+    top: 15%;
+    left: 15%;
+}

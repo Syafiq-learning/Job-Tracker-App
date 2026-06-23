@@ -53,7 +53,7 @@ com.yourname.tracker
 
 ✅ User CRUD
 ✅ JobApplication CRUD
-
+✅ Login & register frontend
 ⬜ Validation
 ⬜ Exception Handling
 ⬜ Status Filtering

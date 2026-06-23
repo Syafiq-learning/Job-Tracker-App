@@ -1,0 +1,30 @@
+body{
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(
+        -45deg,
+        #4f8cff,
+        #6ea8fe,
+        #8ec5fc,
+        #b6d4fe
+    );
+    Background-size: 300% 300%;
+    animation: gradientMove 15s ease infinite;
+}
+.glass-card{
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    padding: 30px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+.glow-circle{
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    background: rgba(13, 202, 240, 0.25);
+    border-radius: 50%;
+    filter: blur(100px);
+    top: 15%;
+    left: 15%;
+}
