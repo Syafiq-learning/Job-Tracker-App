@@ -1,39 +1,114 @@
-body{
+﻿body{
     min-height: 100vh;
     margin: 0;
-    background: linear-gradient(
-        -45deg,
-        #4f8cff,
-        #6ea8fe,
-        #8ec5fc,
-        #b6d4fe
-    );
-    Background-size: 300% 300%;
+    background: linear-gradient(-45deg,#4f8cff,#6ea8fe,#8ec5fc,#b6d4fe);
+    background-size: 300% 300%;
     animation: gradientMove 12s ease infinite;
+    position: relative;
+    overflow-x: hidden;
 }
+body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.35) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+    pointer-events: none;
+    z-index: 0;
+}
+.container, nav{ position: relative; z-index: 1; }
 @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-            }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 .glass-card{
     background: rgba(255,255,255,0.85);
     backdrop-filter: blur(12px);
-    border-radius: 12px;
+    border-radius: 16px;
     color: #212529;
     padding: 30px;
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    box-shadow: 0 10px 40px rgba(31,64,140,0.25);
 }
-.form-label {
-    color: #212529;
+.auth-wrapper{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 12px;
 }
+.auth-card{ width: 100%; max-width: 440px; }
+.brand-badge{
+    width: 56px; height: 56px;
+    margin: 0 auto 12px;
+    border-radius: 16px;
+    background: linear-gradient(135deg,#0d6efd,#0dcaf0);
+    color: #fff;
+    font-size: 1.6rem;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 16px rgba(13,110,253,0.4);
+}
+.form-label{ color: #212529; font-weight: 500; }
 .glow-circle{
-    position: absolute;
-    width: 160px;
-    height: 160px;
-    background: rgba(13, 202, 240, 0.25);
+    position: fixed;
+    width: 220px; height: 220px;
+    background: rgba(13,202,240,0.35);
     border-radius: 50%;
-    filter: blur(100px);
-    top: 15%;
-    left: 15%;
+    filter: blur(90px);
+    top: 10%; left: 10%;
+    z-index: 0;
 }
+.glow-circle.alt{
+    background: rgba(111,66,193,0.30);
+    top: auto; left: auto;
+    bottom: 8%; right: 8%;
+    width: 280px; height: 280px;
+}
+.navbar-brand{ color: #fff !important; text-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+.stat-card{
+    border: 0;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 6px 24px rgba(31,64,140,0.18);
+    border-top: 4px solid var(--accent, #0d6efd);
+    transition: transform .2s, box-shadow .2s;
+}
+.stat-card:hover{ transform: translateY(-4px); box-shadow: 0 12px 30px rgba(31,64,140,0.28); }
+.stat-card .card-title{
+    font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: #6c757d;
+}
+.stat-card .card-text{ font-size: 2rem; font-weight: 700; color: var(--accent, #0d6efd); margin: 0; }
+.stat-total{ --accent: #0d6efd; }
+.stat-applied{ --accent: #0dcaf0; }
+.stat-interview{ --accent: #ffc107; }
+.stat-offer{ --accent: #198754; }
+.stat-rejected{ --accent: #dc3545; }
+.page-title{ color: #fff; font-weight: 700; text-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+.page-subtitle{ color: rgba(255,255,255,0.9); }
+
+.app-navbar{
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.35);
+    box-shadow: 0 4px 20px rgba(31,64,140,0.2);
+    padding: 12px 0;
+}
+.app-navbar .navbar-brand{ font-size: 1.5rem; font-weight: 700; margin: 0; }
+.nav-logout{
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+.nav-logout:hover{ color: #fff; opacity: .85; }
+.back-link{
+    display: inline-block;
+    margin-bottom: 8px;
+    color: #0d6efd;
+    text-decoration: none;
+    font-weight: 500;
+}
+.back-link:hover{ text-decoration: underline; }
