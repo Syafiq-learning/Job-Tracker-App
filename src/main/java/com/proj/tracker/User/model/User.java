@@ -3,16 +3,23 @@ package com.proj.tracker.User.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.springframework.data.mongodb.core.index.Indexed;
+
 @Document(collection = "user")
 public class User {
     @Id
     private String id;
 
     private String name;
-    private  String email;
-    private char[] password;
 
-    public User(String name, String email, char[] password) {
+    @Indexed(unique = true)
+    private  String email;
+    @JsonIgnore 
+    private String password;
+
+    public User(String name, String email, String password) {
 
         this.name = name;
         this.email = email;
@@ -43,11 +50,11 @@ public class User {
         this.email = email;
     }
 
-    public char[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(char[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 }

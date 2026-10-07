@@ -7,7 +7,6 @@ import com.proj.tracker.User.model.User;
 
 public interface UserService {
 
-    User createUser(User user);
 
     List<User> getAllUsers();
 

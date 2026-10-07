@@ -1,13 +1,15 @@
 package com.proj.tracker.User.controller;
 
 import com.proj.tracker.User.dto.RegisterRequest;
+import com.proj.tracker.User.dto.UserResponse;
 import com.proj.tracker.User.model.User;
 import com.proj.tracker.User.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
+
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
@@ -19,31 +21,31 @@ public class UserController {
         this.userService = userService;
     }
 
+    private UserResponse toResponse(User u) {
+        return new UserResponse(u.getId(), u.getName(), u.getEmail());
+    }
+
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public Map<String, String> register(@RequestBody RegisterRequest request) {
-        User u = userService.register(request);
-        return Map.of("id", u.getId(), "name", u.getName(), "email", u.getEmail());
+    public UserResponse register(@Valid @RequestBody RegisterRequest request) {
+        return toResponse(userService.register(request));
     }
+    
 
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
-    }
 
     @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public List<UserResponse> getAllUsers() {
+        return userService.getAllUsers().stream().map(this::toResponse).toList();
     }
 
     @GetMapping("/{id}")
-    public User getUser(@PathVariable String id) {
-        return userService.getUserById(id);
+    public UserResponse getUser(@PathVariable String id) {
+        return toResponse(userService.getUserById(id));
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable String id, @RequestBody User user) {
-        return userService.updateUser(id, user);
+    public UserResponse updateUser(@PathVariable String id, @RequestBody User user) {
+        return toResponse(userService.updateUser(id, user));
     }
 
     @DeleteMapping("/{id}")

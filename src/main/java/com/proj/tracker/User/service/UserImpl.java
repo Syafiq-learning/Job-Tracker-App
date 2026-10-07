@@ -4,7 +4,6 @@ package com.proj.tracker.User.service;
 import java.util.List;
 
 import com.proj.tracker.User.dto.RegisterRequest;
-import com.proj.tracker.config.PasswordConfig;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,10 +21,7 @@ public class UserImpl implements UserService{
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
-    public User createUser(User user) {
-        return userRepository.save(user);
-    }
+    
 
     @Override
     public List<User> getAllUsers() {
@@ -34,34 +30,41 @@ public class UserImpl implements UserService{
 
     @Override
     public User getUserById(String id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id)
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 
     @Override
     public User updateUser(String id, User user) {
-        User existing = userRepository.findById(id).orElse(null);
+        User existing = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
-        if (existing != null) {
-            existing.setName(user.getName());
-            existing.setEmail(user.getEmail());
-            existing.setPassword(user.getPassword());
-
-            return userRepository.save(existing);
+       
+        existing.setName(user.getName());
+        
+        String email = user.getEmail().trim().toLowerCase();
+        if (!email.equals(existing.getEmail()) && userRepository.existsByEmail(email)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already registered");
         }
+        existing.setEmail(email);
+    
 
-        return null;
+        return userRepository.save(existing);
+
+      
     }
 
     @Override
     public User register(RegisterRequest request) {
-        if (request.email() == null || request.password() == null || request.password().length() < 8) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid email or password (min 8 chars)");
-        }
-        if (userRepository.existsByEmail(request.email())) {
+
+        String email = request.email().trim().toLowerCase();
+        if (userRepository.existsByEmail(email)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already registered");
         }
+        if(!request.password().equals(request.confirmPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Passwords do not match");
+        }
         String hash = passwordEncoder.encode(request.password());
-        return userRepository.save(new User(request.name(), request.email(), hash.toCharArray()));
+        return userRepository.save(new User(request.name(), email, hash));
     }
 
     @Override
