@@ -1,64 +1,19 @@
-# Job-Tracker-App
-Job Application Tracker
+# Job Tracker App
 
-(Info base on chatgpt)
-src/main/
- ├── java/
- └── resources/
-      ├── templates/
-      │     ├── index.html
-      │     ├── dashboard.html
-      └── static/
-            ├── css/
-            ├── js/
+A simple web application to track job applications, manage statuses, and stay organized during the job search process.
 
-chatgpt example
+## Tech Stack
 
-com.yourname.tracker
-│
-├── TrackerApplication.java
-│
-├── config/
-│   └── MongoConfig.java
-│
-├── common/
-│   ├── exception/
-│   │   ├── GlobalExceptionHandler.java
-│   │   └── ResourceNotFoundException.java
-│   ├── response/
-│   │   └── ApiResponse.java
-│   └── util/
-│       └── DateUtil.java
-│
-├── user/
-│   ├── controller/
-│   ├── service/
-│   ├── repository/
-│   ├── model/
-│   └── dto/
-│
-├── job/
-│   ├── controller/
-│   ├── service/
-│   ├── repository/
-│   ├── model/
-│   └── dto/
-│
-└── application/
-├── controller/
-├── service/
-├── repository/
-├── model/
-└── dto/
+- **Java 17**
+- **Spring (Boot, MVC, MongoDB)**
+- **Thymeleaf**
+- **Bootstrap**
+- **Maven**
+- **MongoDB**
 
-✅ User CRUD
-✅ JobApplication CRUD
-✅ Login & register frontend
-⬜ Validation
-⬜ Exception Handling
-⬜ Status Filtering
-⬜ Dashboard Endpoint
-⬜ Swagger
-⬜ JWT Authentication
-⬜ Docker
-⬜ Frontend (HTML/JS or React)
+## Features
+
+- User registration and login
+- Manage job applications (create, update, delete)
+- Track application statuses
+- Dashboard view for job tracking
