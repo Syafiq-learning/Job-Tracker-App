@@ -1,64 +1,33 @@
-# Job-Tracker-App
-Job Application Tracker
+# Job Tracker App
 
-(Info base on chatgpt)
-src/main/
- ├── java/
- └── resources/
-      ├── templates/
-      │     ├── index.html
-      │     ├── dashboard.html
-      └── static/
-            ├── css/
-            ├── js/
+A full-stack job application tracking application to help users manage job opportunities, monitor application status, and stay organized throughout the job search process.
 
-chatgpt example
+## Tech Stack
 
-com.yourname.tracker
-│
-├── TrackerApplication.java
-│
-├── config/
-│   └── MongoConfig.java
-│
-├── common/
-│   ├── exception/
-│   │   ├── GlobalExceptionHandler.java
-│   │   └── ResourceNotFoundException.java
-│   ├── response/
-│   │   └── ApiResponse.java
-│   └── util/
-│       └── DateUtil.java
-│
-├── user/
-│   ├── controller/
-│   ├── service/
-│   ├── repository/
-│   ├── model/
-│   └── dto/
-│
-├── job/
-│   ├── controller/
-│   ├── service/
-│   ├── repository/
-│   ├── model/
-│   └── dto/
-│
-└── application/
-├── controller/
-├── service/
-├── repository/
-├── model/
-└── dto/
+### Frontend
+- **React**
+- **TypeScript**
+- **Vite**
+- **Tailwind CSS**
 
-✅ User CRUD
-✅ JobApplication CRUD
-✅ Login & register frontend
-⬜ Validation
-⬜ Exception Handling
-⬜ Status Filtering
-⬜ Dashboard Endpoint
-⬜ Swagger
-⬜ JWT Authentication
-⬜ Docker
-⬜ Frontend (HTML/JS or React)
+### Backend
+- **Node.js**
+- **Express.js**
+- **Prisma ORM**
+- **PostgreSQL**
+
+### Authentication & Security
+- **JWT (JSON Web Tokens)**
+- **bcrypt**
+
+### Tooling & Developer Experience
+- **ESLint**
+- **Prettier**
+- **Nodemon**
+
+## Features
+- Track job applications by status (Applied, Interview, Offer, Rejected)
+- Add, edit, and delete job entries
+- Organize applications with notes and deadlines
+- Secure user authentication
+- Responsive and clean UI
