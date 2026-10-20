@@ -5,13 +5,13 @@ import java.util.List;
 
 public interface AppService {
 
-    JobApp createApp(JobApp app);
+    JobApp createApp(String email, JobApp app);
 
-    List<JobApp> getAllApp();
+    List<JobApp> getAllApp(String email);
 
-    JobApp getAppByID(String id);
+    JobApp getAppByID(String email, String id);
 
-    JobApp updateApp(String id, JobApp app);
+    JobApp updateApp(String email, String id, JobApp app);
 
-    void deleteApp(String id);
+    void deleteApp(String email, String id);
 }

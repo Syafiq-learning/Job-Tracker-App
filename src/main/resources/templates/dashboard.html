@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Dashboard</title>
@@ -12,23 +12,23 @@
 <div class="glow-circle alt"></div>
   <nav class="navbar navbar-expand-lg navbar-light bg-transparent mx-3 mt-1 mb-3">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="/index">Tracker</a>
-      <div >
-        <a class="navbar-brand" href="/login">Logout</a>
-      </div>
+      <a class="navbar-brand fw-bold" href="/">Tracker</a>
+      <form th:action="@{/logout}" method="post" class="m-0">
+        <button type="submit" class="btn btn-link navbar-brand">Logout</button>
+      </form>
     </div>
-
   </nav>
-  <div class="container mt-4">
+
+  <div class="container mt-4 mb-5">
     <h2 class="page-title mb-1">Dashboard</h2>
     <p class="page-subtitle mb-4">Your job search at a glance</p>
+
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-5 g-4">
-      <!-- Repeat .col div 5+ times -->
       <div class="col">
         <div class="card h-100 stat-card stat-total">
           <div class="card-body">
             <h5 class="card-title">Total</h5>
-            <p class="card-text">0</p>
+            <p class="card-text" th:text="${total}">0</p>
           </div>
         </div>
       </div>
@@ -36,7 +36,7 @@
         <div class="card h-100 stat-card stat-applied">
           <div class="card-body">
             <h5 class="card-title">Applied</h5>
-            <p class="card-text">0</p>
+            <p class="card-text" th:text="${applied}">0</p>
           </div>
         </div>
       </div>
@@ -44,7 +44,7 @@
         <div class="card h-100 stat-card stat-interview">
           <div class="card-body">
             <h5 class="card-title">Interview</h5>
-            <p class="card-text">0</p>
+            <p class="card-text" th:text="${interview}">0</p>
           </div>
         </div>
       </div>
@@ -52,7 +52,7 @@
         <div class="card h-100 stat-card stat-offer">
           <div class="card-body">
             <h5 class="card-title">Offer</h5>
-            <p class="card-text">0</p>
+            <p class="card-text" th:text="${offer}">0</p>
           </div>
         </div>
       </div>
@@ -60,15 +60,85 @@
         <div class="card h-100 stat-card stat-rejected">
           <div class="card-body">
             <h5 class="card-title">Rejected</h5>
-            <p class="card-text">0</p>
+            <p class="card-text" th:text="${rejected}">0</p>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="glass-card mt-4">
+      <h5 class="mb-3">Add application</h5>
+      <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+      <form th:action="@{/applications}" method="post" class="row g-3">
+        <div class="col-md-3">
+          <label class="form-label">Company</label>
+          <input type="text" name="companyName" class="form-control" required>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Position</label>
+          <input type="text" name="position" class="form-control" required>
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Status</label>
+          <select name="status" class="form-select">
+            <option th:each="s : ${statuses}" th:value="${s}" th:text="${s}">APPLIED</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Applied date</label>
+          <input type="date" name="appliedDate" class="form-control" th:value="${today}" required>
+        </div>
+        <div class="col-md-12">
+          <label class="form-label">Notes</label>
+          <input type="text" name="notes" class="form-control">
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="glass-card mt-4">
+      <h5 class="mb-3">Your applications</h5>
+      <p th:if="${#lists.isEmpty(apps)}" class="mb-0">No applications yet. Add your first one above.</p>
+      <div th:unless="${#lists.isEmpty(apps)}" class="table-responsive">
+        <table class="table align-middle">
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Position</th>
+              <th>Applied</th>
+              <th>Status</th>
+              <th>Notes</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="app : ${apps}">
+              <td th:text="${app.companyName}"></td>
+              <td th:text="${app.position}"></td>
+              <td th:text="${app.appliedDate}"></td>
+              <td>
+                <form th:action="@{/applications/{id}/status(id=${app.id})}" method="post" class="d-flex gap-2">
+                  <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
+                    <option th:each="s : ${statuses}" th:value="${s}" th:text="${s}"
+                            th:selected="${s == app.status}"></option>
+                  </select>
+                </form>
+              </td>
+              <td th:text="${app.notes}"></td>
+              <td>
+                <form th:action="@{/applications/{id}/delete(id=${app.id})}" method="post"
+                      onsubmit="return confirm('Delete this application?');">
+                  <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 
 </body>
 </html>
-
-
-

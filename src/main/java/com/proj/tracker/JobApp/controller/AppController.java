@@ -3,10 +3,10 @@ package com.proj.tracker.JobApp.controller;
 import com.proj.tracker.JobApp.model.JobApp;
 import com.proj.tracker.JobApp.service.AppService;
 
-
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -20,38 +20,30 @@ public class AppController {
     }
 
     @PostMapping
-    public JobApp createApp(
-           @Validated @RequestBody JobApp app){
-        return appService.createApp(app);
+    public JobApp createApp(Principal principal,
+                            @Validated @RequestBody JobApp app){
+        return appService.createApp(principal.getName(), app);
     }
 
     @GetMapping
-    public List<JobApp> getAllApp(){
-        return appService.getAllApp();
+    public List<JobApp> getAllApp(Principal principal){
+        return appService.getAllApp(principal.getName());
     }
 
     @GetMapping("/{id}")
-    public JobApp getAppByID(@PathVariable String id){
-        return appService.getAppByID(id);
+    public JobApp getAppByID(Principal principal, @PathVariable String id){
+        return appService.getAppByID(principal.getName(), id);
     }
 
     @PutMapping("/{id}")
-    public JobApp updateApp(@PathVariable String id,
-                            @RequestBody JobApp app){
-        return appService.updateApp(id,app);
+    public JobApp updateApp(Principal principal,
+                            @PathVariable String id,
+                            @Validated @RequestBody JobApp app){
+        return appService.updateApp(principal.getName(), id, app);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteApp(@PathVariable String id){
-        appService.deleteApp(id);
+    public void deleteApp(Principal principal, @PathVariable String id){
+        appService.deleteApp(principal.getName(), id);
     }
 }
-
-
-
-
-
-
-
-
-

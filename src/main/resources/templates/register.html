@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
@@ -18,26 +18,27 @@
             <h3 style="text-align:center; font-weight: bold;">Register</h3>
             <p style="text-align:center">Register your account</p>
             <div class="card-body p-4">
-                <form>
+                <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+                <form th:action="@{/register}" method="post">
 
                     <div class="mb-3">
                         <label class="form-label">Username</label>
-                        <input type="text" class="form-control" required>
+                        <input type="text" name="name" class="form-control" th:value="${name}" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Email</label>
-                        <input type="email" class="form-control" required>
+                        <input type="email" name="email" class="form-control" th:value="${email}" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Password</label>
-                        <input type="password" class="form-control" required>
+                        <input type="password" name="password" class="form-control" minlength="8" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" required>
+                        <input type="password" name="confirmPassword" class="form-control" required>
                     </div>
 
                     <button class="btn btn-primary mt-3 w-100">

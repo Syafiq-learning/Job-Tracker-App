@@ -3,6 +3,9 @@ package com.proj.tracker.JobApp.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 
 @Document(collection = "job")
@@ -13,8 +16,11 @@ public class JobApp {
     private String id;
 
     private String userId;
+    @NotBlank
     private String companyName;
+    @NotBlank
     private String position;
+    @NotNull
     private ApplicationStatus status;
     private LocalDate appliedDate;
     private String notes;
@@ -24,6 +30,18 @@ public class JobApp {
         this.position = position;
         this.status = status;
         this.appliedDate = appliedDate;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public String getUserId() {
@@ -69,7 +87,10 @@ public class JobApp {
     @Override
     public String toString() {
         return "JobApp{" +
-                "notes='" + notes + '\'' +
+                "id='" + id + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", position='" + position + '\'' +
+                ", status=" + status +
                 '}';
     }
 }
